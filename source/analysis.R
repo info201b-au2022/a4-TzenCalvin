@@ -161,6 +161,9 @@ plot_jail_pop_by_states("DC")
 
 ## Section 5  ---- <variable comparison that reveals potential patterns of inequality>
 #----------------------------------------------------------------------------#
+# This function creates a dataframe with three columns: one that contains the 
+# year, one that contains a race, and the last containing the proportion of that 
+# race's population in jail for that year.
 get_race_prop <- function(){
   graph_data <- incarcerations %>%
     group_by(year) %>%
@@ -183,6 +186,8 @@ get_race_prop <- function(){
   return(graph_data)
 }
 
+# This function uses the dataframe we created earlier and constructs a line chart 
+# displaying the data, with a different color for each race.
 plot_race_prop <- function(){
   graph_data = get_race_prop()
   
@@ -205,6 +210,9 @@ plot_race_prop <- function(){
 
 ## Section 6  ---- <a map shows potential patterns of inequality that vary geographically>
 #----------------------------------------------------------------------------#
+# This function creates a dataframe with that joins two dataframes: the states one 
+# used to graph the map, and a data set containing proportion of black people imprisoned 
+# for every state. 
 get_geog_black_prop <- function(){
   graph_data <- incarcerations %>%
     filter(year == 2018) %>%
@@ -229,6 +237,9 @@ get_geog_black_prop <- function(){
   return(state_shape)   
 }
 
+# This function creates a choropleth map that showcases the proportion of black 
+# people imprisoned for every state. The brighter the state, the higher the proportion
+# is.
 plot_geog_black_prop <- function(){
   graph_data = get_geog_black_prop()
   
