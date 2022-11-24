@@ -1,7 +1,7 @@
 ---
-title: "Your A4 Report Title (TODO: Revise title)"
-author: "Your Name"
-date: '2022-11-01'
+title: "Inherent Disadvantage From Birth: Unfair Incarcerations Based on Your Own Skin"
+author: "Calvin Tzen"
+date: '2022-11-23'
 output: html_document
 ---
 
@@ -11,35 +11,42 @@ source("../source/analysis.R")
 ```
 
 ## Abstract 
-[TODO: Include a short abstract (about 50 words)]
-
-# Test (TODO: Remove before submission!!)
-```{r echo=FALSE}
-q1_string <- test_query1()
-num <- 5
-```
-As you know, this is a markdown report. The [R Markdown Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) is **useful!**
-
-* Here's a test of a dynamic variable. Say **"`r q1_string`!!!** 
-* Here's another test. A vector
-of numbers: `r test_query2(num)`.
-
-Recall that _{r echo=TRUE}_ can be used to display the code, 
-which is very useful when developing and debugging a report. Here's an example: 
-
-```{r echo=TRUE}
-num <- 5
-sum <- sum(test_query2(num))
-print(sum)
-```
+The US prison system is among the most clear examples of racism in the states. Through events such as the death of George Floyd and the rise of the Black Lives Matter movement, people have been criticizing the prison system more and more. The Vera Institute, a research and policy US organization that pushes for change to ensure equality, has collected data from 1970 to 2018 regarding incarceration and how different races and genders are treated, providing a source to analyze racism within the system.
 
 ## Introduction 
-[TODO]
+The Vera Institute data set covers 48 years of incarceration in the states down to a county level, including population, demographics, and the method an incarcerated prisoner got imprisoned for. The **_direct stakeholders_** for this data set include those who want to analyze incarceration data and draw meaningful conclusions for themselves with accurate data, such as **data scientists** and **journalists** looking to write about the rather large racial problems in the US. **_Indirect stakeholders_** include **those who will read the articles** that the journalists wrote or contain the data scientists' conclusions, allowing them to educate or strengthen their understanding about the underlying problems in American incarceration, or **politicians** looking to use the conclusions to try and enact policies to lessen racism or promote themselves up for election/reelection. To help come to a conclusion of rampant racism, we have to first look at the data set broadly: How has the prison population itself changed throughout these 48 years, but as a whole and state-wise? Only then can we look at questions that will help uncover the racism in our incarceration system, such as asking how much the proportion of a race's population compares to other races and across the country.
 
-## Data Summary 
-[TODO]
+## Data Summary
 
-[TODO ... other sections ... See Canvas for details]
+The data set contains several interesting values that reveals a staggering amount of inequality in US incarceration. For example, the black jail population in proportion with the black population in 2018 is **`r black_prop_jail`**, more than three times compared to the same observation for white people, **`r white_prop_jail`**. The average jail population rate, which is the rate at which the population of the jail increases each year, between black and white people is also staggering, with black people averaging at **`r avg_black_pop_rate`** people/year and white people averaging at a comparatively pitiful **`r avg_white_pop_rate`** people/year. The highest average black jail population rate in a single year was in **`r most_black_rate_year`** at a whopping **`r most_black_rate`** people/year. From these data points alone, we are already starting to see evidence that clearly points to inequality in our incarceration system.
 
-_All the very best with your work!_
+## Growth of the U.S. Prison Population
 
+```{r echo=FALSE}
+plot_jail_pop_for_us()
+```
+
+A key question that we need to answer first about the data set is: how has the number of people going to jail increased over the years? The graph above shows that over the course of 48 years, from 1970 to 2018, the jail population in the US has more than quadrupled in size, with most of the increase occurring between around 1980 to around 2008. After 2008, the population takes a small dip and then recovers, seemingly stabilizing around the current population.
+
+## Growth of Prison Population by State
+
+```{r echo=FALSE}
+plot_jail_pop_by_states(c("WA", "TX", "CA"))
+```
+
+Another question to consider is how much has jail population increased in each state over the years as well? Since individual states do not represent the US as a whole, it's important to look closer and more in depth. This line graph displays the increase in jail population from 1970 to 2018 in three different states: California, Texas, and Washington. We clearly see a much more sudden increase in jail population in California and Texas, while Washington has a much more demure and gradual climb. This may be due to a much bigger population and different policies between the different states, with Washington having a much smaller population than California or Texas.
+
+## Inequality in US Incarceration
+
+```{r echo=FALSE}
+plot_race_prop()
+```
+
+When looking for inequality in our incarceration system, it makes sense to start looking at the proportion of people imprisoned and wonder if there are any disparities between races. There is bound to be more white people than black or Hispanic people in jail due to the sheer difference between the total white population and the total black or Hispanic population, so we need to look at the proportion, or the percentage of the total population that have been incarcerated, instead. This line chart displays a comparison between the proportion of the white and black population that have been incarcerated. Even though the numbers are quite small, the proportion is based on millions of people. Throughout the entire time frame of this data set, the proportion of white people imprisoned has always been less than a third of the proportion for black people, exhibiting clear inequality in our incarceration system.
+
+## Geographical Representation of Incarceration Inequality
+```{r echo=FALSE}
+plot_geog_black_prop()
+```
+
+While there's inequality among races, it is also important to look at how different states are involved as well. How does black incarceration compare across the country? This choropleth map of the US displays such data for the year 2018, with a brighter red indicating a higher proportion of the black population imprisoned while a darker red means the opposite. It seems as though states with a higher white population have a higher proportion of black people incarcerated than the states with a more diversified population. While the colors may not be extremely distinguishable from each other, the legend shows that even a slightly brighter shade could mean double or triple the proportion of incarcerated populations.
